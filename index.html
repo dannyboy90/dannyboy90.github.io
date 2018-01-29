@@ -26,6 +26,39 @@
 	<div id="example-table"></div>
 </body>
 <script>
+	function customFilter(data) {
+		return data.car && data.rating < 3;
+	}
+
+	//Trigger setFilter function with correct parameters
+	function updateFilter() {
+
+		var filter = $("#filter-field").val() == "function" ? customFilter : $("#filter-field").val();
+
+		if ($("#filter-field").val() == "function") {
+			$("#filter-type").prop("disabled", true);
+			$("#filter-value").prop("disabled", true);
+		} else {
+			$("#filter-type").prop("disabled", false);
+			$("#filter-value").prop("disabled", false);
+		}
+
+		$("#example-table").tabulator("setFilter", filter, $("#filter-type").val(), $("#filter-value").val());
+	}
+
+	//Update filters on value change
+	$("#filter-field, #filter-type").change(updateFilter);
+	$("#filter-value").keyup(updateFilter);
+
+	//Clear filters on "Clear Filters" button click
+	$("#filter-clear").click(function () {
+		$("#filter-field").val("");
+		$("#filter-type").val("=");
+		$("#filter-value").val("");
+
+		$("#example-table").tabulator("clearFilter");
+	});
+	//Build Tabulator
 	$("#example-table").tabulator({
 		height: 205, // set height of table, this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
 		layout: "fitColumns", //fit columns to width of table (optional)
@@ -58,64 +91,63 @@
 </script>
 <script>
 	//define some sample data
-	var tabledata = [
-	{
-		"desc": "News Site",
-		"title": "TEST TITLE",
-		"URL": "http://www.cnn.com",
-		"id": "7",
-		"date": "Monday, 2018-01-29 08:50:16",
-		"env": "Website"
-	},
-	{
-		"desc": "A better Markdown extention for code",
-		"title": "Markdown Preview Enhanced - Visual Studio Marketplace",
-		"URL": "https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced",
-		"id": "6",
-		"date": "Monday, 2018-01-29 07:39:22",
-		"enviorment": "Markdown"
-	},
-	{
-		"desc": "What problem did this resource help you to solve?",
-		"title": "Building on the Command Line",
-		"URL": "https://msdn.microsoft.com/en-us/library/f35ctcxw.aspx",
-		"id": "5",
-		"date": "Sunday, 2018-01-28 21:25:07",
-		"env": "C++"
-	},
-	{
-		"desc": "How to compile stuff?",
-		"title": "Stack Overflow - Where Developers Learn, Share, &amp; Build Careers",
-		"URL": "https://stackoverflow.com",
-		"id": "4",
-		"date": "Sunday, 2018-01-28 21:17:34",
-		"env": "TEST"
-	},
-	{
-		"desc": "Update a nested json structure",
-		"title": "python - Trying to grow a nested dictionary by adding more key:value pairs - Stack Overflow",
-		"URL": "https://stackoverflow.com/a/26839685/3665717",
-		"id": "4",
-		"date": "Sunday, 2018-01-28 20:55:18",
-		"env": "Python"
-	},
-	{
-		"desc": "Prettify",
-		"title": "Autohotkey-code-prettify - in a web page - Github Project Hosting",
-		"URL": "http://sl5.it/SL5_preg_contentFinder/examples/AutoHotKey/converts_your_autohotkey_code_into_pretty_indented_source_code.php",
-		"id": "2",
-		"date": "Unknown",
-		"env": "AutoHotKey"
-	},
-	{
-		"desc": "How to enable preview for text based files",
-		"title": "superuser link",
-		"URL": "https://superuser.com/a/1151237/752393",
-		"id": "1",
-		"date": "Unknown",
-		"env": "Windows"
-	}
-];
+	var tabledata = [{
+			"desc": "News Site",
+			"title": "TEST TITLE",
+			"URL": "http://www.cnn.com",
+			"id": "7",
+			"date": "Monday, 2018-01-29 08:50:16",
+			"env": "Website"
+		},
+		{
+			"desc": "A better Markdown extention for code",
+			"title": "Markdown Preview Enhanced - Visual Studio Marketplace",
+			"URL": "https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced",
+			"id": "6",
+			"date": "Monday, 2018-01-29 07:39:22",
+			"enviorment": "Markdown"
+		},
+		{
+			"desc": "What problem did this resource help you to solve?",
+			"title": "Building on the Command Line",
+			"URL": "https://msdn.microsoft.com/en-us/library/f35ctcxw.aspx",
+			"id": "5",
+			"date": "Sunday, 2018-01-28 21:25:07",
+			"env": "C++"
+		},
+		{
+			"desc": "How to compile stuff?",
+			"title": "Stack Overflow - Where Developers Learn, Share, &amp; Build Careers",
+			"URL": "https://stackoverflow.com",
+			"id": "4",
+			"date": "Sunday, 2018-01-28 21:17:34",
+			"env": "TEST"
+		},
+		{
+			"desc": "Update a nested json structure",
+			"title": "python - Trying to grow a nested dictionary by adding more key:value pairs - Stack Overflow",
+			"URL": "https://stackoverflow.com/a/26839685/3665717",
+			"id": "4",
+			"date": "Sunday, 2018-01-28 20:55:18",
+			"env": "Python"
+		},
+		{
+			"desc": "Prettify",
+			"title": "Autohotkey-code-prettify - in a web page - Github Project Hosting",
+			"URL": "http://sl5.it/SL5_preg_contentFinder/examples/AutoHotKey/converts_your_autohotkey_code_into_pretty_indented_source_code.php",
+			"id": "2",
+			"date": "Unknown",
+			"env": "AutoHotKey"
+		},
+		{
+			"desc": "How to enable preview for text based files",
+			"title": "superuser link",
+			"URL": "https://superuser.com/a/1151237/752393",
+			"id": "1",
+			"date": "Unknown",
+			"env": "Windows"
+		}
+	];
 
 	//load sample data into the table
 	$("#example-table").tabulator("setData", tabledata);
