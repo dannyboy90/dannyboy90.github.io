@@ -38,7 +38,8 @@
 		height: "autofit", // set height of table, this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
 		layout: "fitColumns", //fit columns to width of table (optional)
 		pagination:"local",
-    	paginationSize:20,
+		paginationSize:20,
+		responsiveLayout:true,
 		columns: [ //Define Table Columns
 			{
 				title: "Enviorment",
@@ -51,6 +52,7 @@
 				title: "Description",
 				field: "desc",
 				align: "left",
+				width: "150",
 				headerFilter:"input"
 
 			},
