@@ -18,14 +18,22 @@
 
 
 <body>
-<style>
-/* *{font-family:ProFontWindows;} */
-@font-face { font-family: ProFontWindows; src: url('ProFontWindows.ttf'); } 
-body {
-  background-color: #222; 
-  font-family:ProFontWindows;
-}
-</style>	
+	<style>
+		/* *{font-family:ProFontWindows;} */
+
+		@font-face {
+			font-family: ProFontWindows;
+			src: url('ProFontWindows.ttf');
+		}
+
+		body {
+			background-color: #222;
+			font-family: ProFontWindows;
+		}
+
+
+
+	</style>
 
 	<h2>Resources</h2>
 
@@ -41,6 +49,7 @@ body {
 
 </body>
 <script>
+	//var json = require('./db.json');
 	//Build Tabulator
 	$("#example-table").tabulator({
 		height: "autofit", // set height of table, this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
@@ -50,7 +59,8 @@ body {
 		paginationSize: 20,
 		responsiveLayout: true,
 		variableHeight: true,
-		layout: "fitDataFill",
+
+		//layout: "fitDataFill",
 		columns: [ //Define Table Columns
 			{
 				title: "Enviorment",
@@ -76,6 +86,7 @@ body {
 				title: "Link",
 				field: "URL",
 				headerFilter: "input",
+				formatter: "html",
 				variableHeight: true
 			},
 			{
@@ -94,6 +105,13 @@ body {
 
 	//define some sample data
 	var tabledata = [{
+			"desc": "News Site",
+			"title": "TEST TITLE",
+			"URL": " <a href=\"https://www.w3schools.com/html/\">Visit our HTML tutorial</a>",
+			"id": "7",
+			"date": "Monday, 2018-01-29 08:50:16",
+			"env": "Website"
+		}, {
 			"desc": "News Site",
 			"title": "TEST TITLE",
 			"URL": "http://www.cnn.com",
@@ -140,212 +158,13 @@ body {
 			"id": "2",
 			"date": "Unknown",
 			"env": "AutoHotKey"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
-		},
-		{
-			"desc": "How to enable preview for text based files",
-			"title": "superuser link",
-			"URL": "https://superuser.com/a/1151237/752393",
-			"id": "1",
-			"date": "Unknown",
-			"env": "Windows"
 		}
+
 	];
 
 	//load sample data into the table
 	$("#example-table").tabulator("setData", tabledata);
-	$("#example-table").tabulator({//not working?
+	$("#example-table").tabulator({ //not working?
 		selectable: true,
 	});
 </script>
