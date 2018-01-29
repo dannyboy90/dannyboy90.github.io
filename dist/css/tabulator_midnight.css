@@ -5,6 +5,10 @@ a:hover, a:visited, a:link, a:active {
   text-decoration: none;
 }
 
+.tabulator .tabulator-col-title{
+  text-align:center;
+}
+
 .tabulator {
   position: relative;
   border: 1px solid #333;
