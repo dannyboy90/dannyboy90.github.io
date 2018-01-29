@@ -4,7 +4,7 @@
 <head>
 	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 	<script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/jquery-ui.min.js"></script>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.3.3/css/tabulator.min.css" rel="stylesheet">
+	<link href="dist/css/tabulator_midnight.css" rel="stylesheet">
 	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.3.3/js/tabulator.min.js"></script> -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.3.3/js/tabulator.js"></script>
 	<!-- <script>
@@ -16,7 +16,13 @@
 	</script> -->
 </head>
 
+
 <body>
+<style>*{font-family:ProFontWindows;}
+body {
+  background-color: #222; 
+}
+</style>	
 
 	<h2>Resources</h2>
 
@@ -25,48 +31,57 @@
 
 	<button>Click me</button> -->
 	<div class="container">
-		<p><div id="example-table"></div></p>
+		<p>
+			<div id="example-table"></div>
+		</p>
 	</div>
 
 </body>
 <script>
-	
-
-	
 	//Build Tabulator
 	$("#example-table").tabulator({
 		height: "autofit", // set height of table, this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
 		layout: "fitColumns", //fit columns to width of table (optional)
-		pagination:"local",
-		paginationSize:20,
-		responsiveLayout:true,
+
+		pagination: "local",
+		paginationSize: 20,
+		responsiveLayout: true,
+		variableHeight: true,
+		layout: "fitDataFill",
 		columns: [ //Define Table Columns
 			{
 				title: "Enviorment",
 				field: "env",
-				width: 150,
+
 				align: "center",
-				headerFilter:"input"
+				headerFilter: "input",
+				headerFilterPlaceholder: "Filter enviorement",
+				variableHeight: true,
+
+
 			},
 			{
 				title: "Description",
 				field: "desc",
 				align: "left",
-				width: "150",
-				headerFilter:"input"
+
+				headerFilter: "input",
+				variableHeight: true
 
 			},
 			{
 				title: "Link",
 				field: "URL",
-				headerFilter:"input"
+				headerFilter: "input",
+				variableHeight: true
 			},
 			{
 				title: "Date",
 				field: "date",
 				sorter: "date",
 				align: "center",
-				headerFilter:"input"
+				headerFilter: "input",
+				variableHeight: true
 			},
 		],
 		// rowClick: function (e, row) { //trigger an alert message when the row is clicked
@@ -327,6 +342,9 @@
 
 	//load sample data into the table
 	$("#example-table").tabulator("setData", tabledata);
+	$("#example-table").tabulator({//not working?
+		selectable: true,
+	});
 </script>
 
 </html>
