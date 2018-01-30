@@ -1,146 +1,187 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-	<script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/jquery-ui.min.js"></script>
-	<link href="dist/css/tabulator_midnight.css" rel="stylesheet">
-	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.3.3/js/tabulator.min.js"></script> -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.3.3/js/tabulator.js"></script>
-	<!-- <script>
-		$(document).ready(function () {
-			$("button").click(function () {
-				$("p").hide();
-			});
-		});
-	</script> -->
+    <title>CRUD Table</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="../assets/examples.css">
+    <style>
+        .update {
+            color: #333;
+            margin-right: 5px;
+        }
+        .remove {
+            color: red;
+            margin-left: 5px;
+        }
+        .alert {
+            padding: 0 14px;
+            margin-bottom: 0;
+            display: inline-block;
+        }
+    </style>
+    <script src="../assets/jquery.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="../ga.js"></script>
 </head>
-
-
 <body>
-	<style>
-		.tabulator .tabulator-col-title {
-			text-align: center;
-		}
+    <div class="container">
+        <h1>CRUD Table</h1>
+        <p class="toolbar">
+            <a class="create btn btn-default" href="javascript:">Create Item</a>
+            <span class="alert"></span>
+        </p>
+        <table id="table"
+               data-show-refresh="true"
+               data-show-columns="true"
+               data-search="true"
+               data-query-params="queryParams"
+               data-toolbar=".toolbar">
+            <thead>
+            <tr>
+                <th data-field="name">Name</th>
+                <th data-field="stargazers_count">Stars</th>
+                <th data-field="forks_count">Forks</th>
+                <th data-field="description">Description</th>
+                <th data-field="action"
+                    data-align="center"
+                    data-formatter="actionFormatter"
+                    data-events="actionEvents">Action</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
 
-		@font-face {
-			font-family: ProFontWindows;
-			src: url('ProFontWindows.ttf');
-		}
-
-		body {
-			background-color: #222;
-			font-family: ProFontWindows;
-		}
-	</style>
-	<title>Resources</title>
-	<h1 style="color:rgb(57, 247, 105);" align="center">Resources List</h1>
-
-
-	<!-- <p>This is another paragraph.</p>
-
-	<button>Click me</button> -->
-	<div class="container">
-		<p>
-			<div id="example-table"></div>
-		</p>
-	</div>
-
-</body>
+    <div id="modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Stars</label>
+                        <input type="number" class="form-control" name="stargazers_count" placeholder="Stars">
+                    </div>
+                    <div class="form-group">
+                        <label>Forks</label>
+                        <input type="number" class="form-control" name="forks_count" placeholder="Forks">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" name="description" placeholder="Description">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary submit">Submit</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 <script>
-	//var json = require('./db.json');
-	//Build Tabulator
-	$("#example-table").tabulator({
-		height: "autofit", // set height of table, this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
-		layout: "fitColumns", //fit columns to width of table (optional)
 
-		pagination: "local",
-		paginationSize: 20,
-		responsiveLayout: true,
-		variableHeight: true,
+    var API_URL = 'http://127.0.0.1:3001/list/';
 
-		//layout: "fitDataFill",
-		columns: [ //Define Table Columns
-			{
-				title: "Enviorment",
-				field: "env",
+    var $table = $('#table').bootstrapTable({url: API_URL}),
+        $modal = $('#modal').modal({show: false}),
+        $alert = $('.alert').hide();
 
-				align: "center",
-				headerFilter: "input",
-				headerFilterPlaceholder: "Filter enviorement",
-				variableHeight: true,
+    $(function () {
+        // create event
+        $('.create').click(function () {
+            showModal($(this).text());
+        });
 
+        $modal.find('.submit').click(function () {
+            var row = {};
 
-			},
-			{
-				title: "Description",
-				field: "desc",
-				align: "left",
+            $modal.find('input[name]').each(function () {
+                row[$(this).attr('name')] = $(this).val();
+            });
 
-				headerFilter: "input",
-				variableHeight: true
+            $.ajax({
+                url: API_URL + ($modal.data('id') || ''),
+                type: $modal.data('id') ? 'put' : 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(row),
+                success: function () {
+                    $modal.modal('hide');
+                    $table.bootstrapTable('refresh');
+                    showAlert(($modal.data('id') ? 'Update' : 'Create') + ' item successful!', 'success');
+                },
+                error: function () {
+                    $modal.modal('hide');
+                    showAlert(($modal.data('id') ? 'Update' : 'Create') + ' item error!', 'danger');
+                }
+            });
+        });
+    });
 
-			},
-			{
-				title: "Link",
-				field: "URL",
-				headerFilter: "input",
-				formatter: "html",
-				variableHeight: true
-			},
-			{
-				title: "Date",
-				field: "date",
-				sorter: "date",
-				align: "center",
-				headerFilter: "input",
-				variableHeight: true
-			},
-		],
-		// rowClick: function (e, row) { //trigger an alert message when the row is clicked
-		// 	alert("Row " + row.getData().id + " Clicked!!!!");
-		// },
-	});
-//
-	//define some sample data/ 
-	// DO NOT DELETE THE BELOW NUMBER FOR NOW, IT'S FOR ADDING AN ENTRY
-	var tabledata = [{ //                                                             4
-"desc": "How to block internet access from script",
- "title": "sandbox - Python: block network connections for testing purposes? - Stack Overflow",
- "URL": "<a href=\"https://stackoverflow.com/questions/18601828/python-block-network-connections-for-testing-purposes\">sandbox - Python: block network connections for testing purposes? - Stack Overflow</a>",
-"id": "4",
-"date": "2018-01-30 18:49:39 (Tuesday)",
-"env": "Python"
- }, { 
-			"desc": "Update a nested json structure",
-			"title": "python - Trying to grow a nested dictionary by adding more key:value pairs - Stack Overflow",
-			"URL": "<a href=\"https://stackoverflow.com/a/26839685/3665717\">python - Trying to grow a nested dictionary by adding more key:value pairs - Stack Overflow</a>",
-			"id": "7",
-			"date": "2018-01-29 19:10:11 (Monday)",
-			"env": "Python"
-		}, {
-			"desc": "Current timd and date in a string",
-			"title": "Python: strftime, gmtime not respecting timezone - Stack Overflow",
-			"URL": "<a href=\"https://stackoverflow.com/a/4788566/3665717\">Python: strftime, gmtime not respecting timezone - Stack Overflow</a>",
-			"id": "6",
-			"date": "2018-01-29 19:09:23 (Monday)",
-			"env": "Python"
-		}, {
-			"desc": "AHK code prettifier",
-			"title": "Autohotkey-code-prettify - in a web page - Github Project Hosting",
-			"URL": "<a href=\"http://sl5.it/SL5_preg_contentFinder/examples/AutoHotKey/converts_your_autohotkey_code_into_pretty_indented_source_code.php\">Autohotkey-code-prettify - in a web page - Github Project Hosting</a>",
-			"id": "5",
-			"date": "2018-01-29 17:02:28 (Monday)",
-			"env": "AutoHotKey"
-		}
+    function queryParams(params) {
+        return {};
+    }
 
-	];
+    function actionFormatter(value) {
+        return [
+            '<a class="update" href="javascript:" title="Update Item"><i class="glyphicon glyphicon-edit"></i></a>',
+            '<a class="remove" href="javascript:" title="Delete Item"><i class="glyphicon glyphicon-remove-circle"></i></a>',
+        ].join('');
+    }
 
-	//load sample data into the table
-	$("#example-table").tabulator("setData", tabledata);
-	$("#example-table").tabulator({ //not working?
-		selectable: true,
-	});
+    // update and delete events
+    window.actionEvents = {
+        'click .update': function (e, value, row) {
+            showModal($(this).attr('title'), row);
+        },
+        'click .remove': function (e, value, row) {
+            if (confirm('Are you sure to delete this item?')) {
+                $.ajax({
+                    url: API_URL + row.id,
+                    type: 'delete',
+                    success: function () {
+                        $table.bootstrapTable('refresh');
+                        showAlert('Delete item successful!', 'success');
+                    },
+                    error: function () {
+                        showAlert('Delete item error!', 'danger');
+                    }
+                })
+            }
+        }
+    };
+
+    function showModal(title, row) {
+        row = row || {
+            id: '',
+            name: '',
+            stargazers_count: 0,
+            forks_count: 0,
+            description: ''
+        }; // default row value
+
+        $modal.data('id', row.id);
+        $modal.find('.modal-title').text(title);
+        for (var name in row) {
+            $modal.find('input[name="' + name + '"]').val(row[name]);
+        }
+        $modal.modal('show');
+    }
+
+    function showAlert(title, type) {
+        $alert.attr('class', 'alert alert-' + type || 'success')
+              .html('<i class="glyphicon glyphicon-check"></i> ' + title).show();
+        setTimeout(function () {
+            $alert.hide();
+        }, 3000);
+    }
 </script>
-
+</body>
 </html>
