@@ -269,6 +269,7 @@ a:hover, a:visited, a:link, a:active {
 
 .tabulator .tabulator-row.tabulator-selectable:hover {
   background-color: rgb(57, 247, 105);
+  color:black;
   cursor: pointer;
 }
 
