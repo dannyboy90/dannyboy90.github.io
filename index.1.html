@@ -19,9 +19,7 @@
 
 <body>
 	<style>
-		.tabulator .tabulator-col-title {
-			text-align: center;
-		}
+		/* *{font-family:ProFontWindows;} */
 
 		@font-face {
 			font-family: ProFontWindows;
@@ -33,8 +31,8 @@
 			font-family: ProFontWindows;
 		}
 	</style>
-	<title>Resources</title>
-	<h1 style="color:rgb(57, 247, 105);" align="center">Resources List</h1>
+
+	<h2>Resources</h2>
 
 
 	<!-- <p>This is another paragraph.</p>
@@ -101,36 +99,78 @@
 		// 	alert("Row " + row.getData().id + " Clicked!!!!");
 		// },
 	});
-//
-	//define some sample data/ 
-	// DO NOT DELETE THE BELOW NUMBER FOR NOW, IT'S FOR ADDING AN ENTRY
-	var tabledata = [{ //                                                             4
-"desc": "How to block internet access from script",
- "title": "sandbox - Python: block network connections for testing purposes? - Stack Overflow",
- "URL": "<a href=\"https://stackoverflow.com/questions/18601828/python-block-network-connections-for-testing-purposes\">sandbox - Python: block network connections for testing purposes? - Stack Overflow</a>",
-"id": "4",
-"date": "2018-01-30 18:49:39 (Tuesday)",
-"env": "Python"
- }, { 
+
+	//define some sample data
+	// DO NOT DELETE THE ABOVE  NUMBER FOR NOW, IT'S FOR ADDING AN ENTRY
+	var tabledata = [{ // 10
+			"desc": "News Site",
+			"title": "!TEST TITLE!",
+			"URL": "<a href=\"http://www.cnn.com\">!TEST TITLE!</a>",
+			"id": "10",
+			"date": "Monday, 2018-01-29 14:46:50",
+			"env": "Website"
+		}, {
+
+			"desc": "News Site",
+			"title": "!TEST TITLE!",
+			"URL": "<a href=\"http://www.cnn.com\">!TEST TITLE!</a>",
+			"id": "9",
+			"date": "Monday, 2018-01-29 14:46:50",
+			"env": "Website"
+		}, {
+
+			"desc": "News Site",
+			"title": "TEST TITLE",
+			"URL": "<a href=\"http://www.cnn.com\">TEST TITLE</a>",
+			"id": "8",
+			"date": "Monday, 2018-01-29 14:46:50",
+			"env": "Website"
+		}, {
+			"desc": "News Site",
+			"title": "TEST TITLE",
+			"URL": "http://www.cnn.com",
+			"id": "7",
+			"date": "Monday, 2018-01-29 08:50:16",
+			"env": "Website"
+		},
+		{
+			"desc": "A better Markdown extention for code",
+			"title": "Markdown Preview Enhanced - Visual Studio Marketplace",
+			"URL": "https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced",
+			"id": "6",
+			"date": "Monday, 2018-01-29 07:39:22",
+			"env": "Markdown"
+		},
+		{
+			"desc": "What problem did this resource help you to solve?",
+			"title": "Building on the Command Line",
+			"URL": "https://msdn.microsoft.com/en-us/library/f35ctcxw.aspx",
+			"id": "5",
+			"date": "Sunday, 2018-01-28 21:25:07",
+			"env": "C++"
+		},
+		{
+			"desc": "How to compile stuff?",
+			"title": "Stack Overflow - Where Developers Learn, Share, &amp; Build Careers",
+			"URL": "https://stackoverflow.com",
+			"id": "4",
+			"date": "Sunday, 2018-01-28 21:17:34",
+			"env": "TEST"
+		},
+		{
 			"desc": "Update a nested json structure",
 			"title": "python - Trying to grow a nested dictionary by adding more key:value pairs - Stack Overflow",
-			"URL": "<a href=\"https://stackoverflow.com/a/26839685/3665717\">python - Trying to grow a nested dictionary by adding more key:value pairs - Stack Overflow</a>",
-			"id": "7",
-			"date": "2018-01-29 19:10:11 (Monday)",
+			"URL": "https://stackoverflow.com/a/26839685/3665717",
+			"id": "4",
+			"date": "Sunday, 2018-01-28 20:55:18",
 			"env": "Python"
-		}, {
-			"desc": "Current timd and date in a string",
-			"title": "Python: strftime, gmtime not respecting timezone - Stack Overflow",
-			"URL": "<a href=\"https://stackoverflow.com/a/4788566/3665717\">Python: strftime, gmtime not respecting timezone - Stack Overflow</a>",
-			"id": "6",
-			"date": "2018-01-29 19:09:23 (Monday)",
-			"env": "Python"
-		}, {
-			"desc": "AHK code prettifier",
+		},
+		{
+			"desc": "Prettify",
 			"title": "Autohotkey-code-prettify - in a web page - Github Project Hosting",
-			"URL": "<a href=\"http://sl5.it/SL5_preg_contentFinder/examples/AutoHotKey/converts_your_autohotkey_code_into_pretty_indented_source_code.php\">Autohotkey-code-prettify - in a web page - Github Project Hosting</a>",
-			"id": "5",
-			"date": "2018-01-29 17:02:28 (Monday)",
+			"URL": "http://sl5.it/SL5_preg_contentFinder/examples/AutoHotKey/converts_your_autohotkey_code_into_pretty_indented_source_code.php",
+			"id": "2",
+			"date": "Unknown",
 			"env": "AutoHotKey"
 		}
 
