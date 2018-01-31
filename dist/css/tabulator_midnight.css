@@ -39,7 +39,7 @@ a:hover, a:visited, a:link, a:active {
   background-color: #333;
   color: #fff;
   font-weight: bold;
-  white-space: nowrap;
+  white-space: normal;
   overflow: hidden;
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -54,7 +54,7 @@ a:hover, a:visited, a:link, a:active {
   border-right: 1px solid #333;
   background-color: #333;
   text-align: left;
-  vertical-align: bottom;
+  vertical-align: middle;
   overflow: hidden;
 }
 
@@ -68,15 +68,16 @@ a:hover, a:visited, a:link, a:active {
 .tabulator .tabulator-header .tabulator-col .tabulator-col-content {
   position: relative;
   padding: 4px;
+  white-space: normal;
 }
 
 .tabulator .tabulator-header .tabulator-col .tabulator-col-content .tabulator-col-title {
   box-sizing: border-box;
   width: 100%;
-  white-space: nowrap;
+  white-space: normal;
   overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: bottom;
+  /* text-overflow: ellipsis; */
+  vertical-align: middle;
 }
 
 .tabulator .tabulator-header .tabulator-col .tabulator-col-content .tabulator-col-title .tabulator-title-editor {
@@ -203,7 +204,7 @@ a:hover, a:visited, a:link, a:active {
 .tabulator .tabulator-tableHolder {
   position: relative;
   width: 100%;
-  white-space: nowrap;
+  white-space: normal;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -238,7 +239,7 @@ a:hover, a:visited, a:link, a:active {
   position: relative;
   display: inline-block;
   background-color: #333;
-  white-space: nowrap;
+  white-space: normal;
   overflow: visible;
   color: #fff;
 }
@@ -312,7 +313,7 @@ a:hover, a:visited, a:link, a:active {
   padding: 4px;
   border-right: 1px solid #333;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -452,7 +453,7 @@ a:hover, a:visited, a:link, a:active {
   text-align: right;
   color: #333;
   font-weight: bold;
-  white-space: nowrap;
+  white-space: normal;
   -ms-user-select: none;
   user-select: none;
   -moz-user-select: none;
