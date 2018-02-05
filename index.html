@@ -44,6 +44,12 @@
 			<div id="example-table"></div>
 		</p>
 	</div>
+	<h1 style="color:rgb(57, 247, 105);" align="center">Snippets List</h1>
+	<div class="container">
+		<p>
+			<div id="example-table1"></div>
+		</p>
+	</div>
 
 </body>
 <script>
@@ -97,13 +103,13 @@
 	//define some sample data/ 
 	// DO NOT DELETE THE BELOW NUMBER FOR NOW, IT'S FOR ADDING AN ENTRY
 	var tabledata = [{ //                                                       11
-		"desc":"Run commands with prograss bar",
-		"title":"GitHub - Gist",
+		"desc": "Run commands with prograss bar",
+		"title": "GitHub - Gist",
 		"URL": "<a href=\"https://gist.github.com/514ed28d75342c04b5dc5e1403684fe3\">GitHub - Gist</a>",
-		"id":"11",
-		"date":"2018-02-05 16:40:17 (Monday)",
-		"env":"AutoHotKey"
- 	}, {
+		"id": "11",
+		"date": "2018-02-05 16:40:17 (Monday)",
+		"env": "AutoHotKey"
+	}, {
 		"desc": "List of hex color codes",
 		"title": "500+ Named Colours with rgb and hex values",
 		"URL": "<a href=\"http://cloford.com/resources/colours/500col.htm\">500+ Named Colours with rgb and hex values</a>",
@@ -177,6 +183,85 @@
 	//load sample data into the table
 	$("#example-table").tabulator("setData", tabledata);
 	$("#example-table").tabulator({ //not working?
+		selectable: true,
+	});
+</script>
+
+<script>
+	//var json = require('./db.json');
+	//Build Tabulator
+	$("#example-table1").tabulator({
+		height: "autofit", // set height of table, this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
+		layout: "fitColumns", //fit columns to width of table (optional)
+		pagination: "local",
+		paginationSize: 20,
+		responsiveLayout: true,
+		variableHeight: true,
+		//layout: "fitDataFill",
+		columns: [ //Define Table Columns
+			{
+				title: "Enviorment",
+				field: "env",
+				align: "center",
+				headerFilter: "input",
+				headerFilterPlaceholder: "Filter enviorement",
+				variableHeight: true,
+			},
+			{
+				title: "Description",
+				field: "desc",
+				align: "left",
+				headerFilter: "input",
+				variableHeight: true
+			},
+			{
+				title: "Link",
+				field: "URL",
+				headerFilter: "input",
+				formatter: "html",
+				variableHeight: true
+			},
+			{
+				title: "Date",
+				field: "date",
+				sorter: "date",
+				align: "center",
+				headerFilter: "input",
+				variableHeight: true
+			},
+		],
+		// rowClick: function (e, row) { //trigger an alert message when the row is clicked
+		// 	alert("Row " + row.getData().id + " Clicked!!!!");
+		// },
+	});
+	//
+	//define some sample data/ 
+	// DO NOT DELETE THE BELOW NUMBER FOR NOW, IT'S FOR ADDING AN ENTRY
+	var tabledata1 = [{ //                                                      3
+		"desc":"What does it do?",
+		"title":"GitHub - Gist",
+		"URL": "<a href=\"https://gist.github.com/6b9294dd1bec2910436e47842fc20553\">GitHub - Gist</a>",
+		"id":"3",
+		"date":"2018-02-05 17:01:58 (Monday)",
+		"env":"Bash"
+ 	}, {
+		"desc": "Run commands with prograss bar",
+		"title": "GitHub - Gist",
+		"URL": "<a href=\"https://gist.github.com/514ed28d75342c04b5dc5e1403684fe3\">GitHub - Gist</a>",
+		"id": "2",
+		"date": "2018-02-05 16:40:17 (Monday)",
+		"env": "AutoHotKey"
+	}, {
+		"desc": "Run commands with prograss bar",
+		"title": "GitHub - Gist",
+		"URL": "<a href=\"https://gist.github.com/514ed28d75342c04b5dc5e1403684fe3\">GitHub - Gist</a>",
+		"id": "1",
+		"date": "2018-02-05 16:40:17 (Monday)",
+		"env": "AutoHotKey"
+	}];
+	//load sample data into the table
+	$("#example-table1").tabulator("setData", tabledata1);
+	$("#example-table1").tabulator({ //not working?
 		selectable: true,
 	});
 </script>
